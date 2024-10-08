@@ -1,6 +1,7 @@
 #include <iostream>
+//#include <limits.h>
 
-
+using namespace std;
 
 int main(){
 
@@ -8,21 +9,30 @@ int main(){
 
     std::cin >> size;
     
-    int sum;
+    int max_sum = -200000;
 
-    std::cin >> sum;
-    int old;
+   
+    int cur_sum = 0;
 
-    old = sum;
+  
     
-    for (int i = 1; i<size ; i++){
+    for (int i = 0; i<size ; i++){
         int value;
+        
         std::cin >> value;
-
-        if (sum + value > sum){
-            
+        
+        cur_sum += value;
+        
+        if (cur_sum > max_sum){
+            max_sum = cur_sum;
         }
+        if(cur_sum<0){
+            cur_sum= 0;
+        }
+             
     }
+
+    cout << max_sum << endl;
 
     return 0;
 }
