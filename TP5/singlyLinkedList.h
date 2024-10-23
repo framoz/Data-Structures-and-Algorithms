@@ -188,6 +188,14 @@ public:
     // ------------------------------------------------------------
     // TODO: put the functions you need to implement below this
     // ------------------------------------------------------------
+
+    T & get(int pos){
+        Node<T> *cur = first;
+            for (int i = 0; i < pos; i++)
+                cur = cur->getNext();
+        return cur->getValue();
+    }
+
 };
 
 #endif
