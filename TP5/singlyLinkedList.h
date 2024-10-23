@@ -196,6 +196,17 @@ public:
         return cur->getValue();
     }
 
+    int count(T & v){
+        Node<T> *cur = first;
+        int r = 0;
+            for(int i = 0; i<length; i++){
+                if (cur->getValue() == v) r++;
+                cur = cur->getNext();
+            }
+
+        return r;
+    }
+
 };
 
 #endif
