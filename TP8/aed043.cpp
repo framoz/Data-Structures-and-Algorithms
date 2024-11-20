@@ -5,54 +5,60 @@
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
+    int n;
+    cin >> n;
 
-    unordered_map<string, vector<int>> reviews;
+    unordered_map<string, vector<int>> movieReviews;
 
-    // Input reading
-    for (int i = 0; i < N; ++i) {
+    // Read reviews
+    for (int i = 0; i < n; ++i) {
         string movie;
         int score;
         cin >> movie >> score;
-        reviews[movie].push_back(score);
+        movieReviews[movie].push_back(score);
     }
 
-    // 1. Number of different movies with at least one review
-    int numMovies = reviews.size();
+    // Number of distinct movies
+    int distinctMovies = movieReviews.size();
 
-    // Variables for the maximum reviews
-    int maxReviews = 0, numMaxMovies = 0;
+    // Variables to find the maximum reviews
+    int maxReviews = 0;
+    int moviesWithMaxReviews = 0;
 
-    // Count of movies with more positive than negative reviews
-    int numPositiveMovies = 0;
+    // Count movies with more positive than negative reviews
+    int positiveReviewMovies = 0;
 
-    for (const auto& [movie, scores] : reviews) {
-        // Calculate max reviews and number of movies with max reviews
-        int numScores = scores.size();
-        if (numScores > maxReviews) {
-            maxReviews = numScores;
-            numMaxMovies = 1;
-        } else if (numScores == maxReviews) {
-            ++numMaxMovies;
+    for (auto& entry : movieReviews) {
+        const string& movie = entry.first;
+        const vector<int>& scores = entry.second;
+
+        // Update max reviews and count movies with max reviews
+        int reviewCount = scores.size();
+        if (reviewCount > maxReviews) {
+            maxReviews = reviewCount;
+            moviesWithMaxReviews = 1;
+        } else if (reviewCount == maxReviews) {
+            ++moviesWithMaxReviews;
         }
 
-        // Calculate positive vs negative reviews
-        int positiveCount = 0, negativeCount = 0;
+        // Count positive and negative reviews
+        int positive = 0, negative = 0;
         for (int score : scores) {
-            if (score >= 5)
-                ++positiveCount;
-            else
-                ++negativeCount;
+            if (score >= 5) {
+                ++positive;
+            } else {
+                ++negative;
+            }
         }
-        if (positiveCount > negativeCount)
-            ++numPositiveMovies;
+        if (positive > negative) {
+            ++positiveReviewMovies;
+        }
     }
 
     // Output results
-    cout << numMovies << endl;
-    cout << maxReviews << " " << numMaxMovies << endl;
-    cout << numPositiveMovies << endl;
+    cout << distinctMovies << endl;
+    cout << maxReviews << " " << moviesWithMaxReviews << endl;
+    cout << positiveReviewMovies << endl;
 
     return 0;
 }
