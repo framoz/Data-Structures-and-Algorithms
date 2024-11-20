@@ -210,7 +210,14 @@ public:
   // ---------------------------------------------------------
 
 
-  
+    int numberLeafs() { return numberLeafs(this->root); }
+
+    int numberLeafs(Node *n) {
+        if (n == nullptr) return 0;
+        if (n->left == nullptr and n->right == nullptr) return 1;
+        return numberLeafs(n->left) + numberLeafs(n->right);
+    }
+
 };
 
 
