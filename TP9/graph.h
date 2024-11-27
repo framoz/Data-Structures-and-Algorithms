@@ -141,11 +141,73 @@ public:
         return ret;
     }
 
+    void my_dfs(int v)
+    {
+        // std::cout << v << " "; // show node order
+        nodes[v].visited = true;
+        for (auto e : nodes[v].adj)
+        {
+            int w = e.dest;
+            if (!nodes[w].visited)
+                my_dfs(w);
+        }
+    }
+
+    int int_my_dfs(int v)
+    {
+        int ret = 0;
+        // std::cout << v << " "; // show node order
+        nodes[v].visited = true;
+        for (auto e : nodes[v].adj)
+        {
+            int w = e.dest;
+            if (!nodes[w].visited)
+            {
+                ret++;
+
+                ret += int_my_dfs(w);
+            }
+        }
+        return ret;
+    }
+
     int nrConnectedComponents()
     {
         int ret = 0;
 
+        for (int i = 1; i <= n; i++)
+            nodes[i].visited = false;
+
+        for (int i = 1; i <= n; i++)
+        {
+            if (!nodes[i].visited)
+            {
+                ret++;
+                my_dfs(i);
+            }
+        }
+
         return ret;
+    }
+
+    int largestComponent()
+    {
+        int ret = 0;
+
+        for (int i = 1; i <= n; i++)
+            nodes[i].visited = false;
+
+        for (int i = 1; i <= n; i++)
+        {
+            if (!nodes[i].visited)
+            {
+                int v = int_my_dfs(i);
+                if (v > ret)
+                    ret = v;
+            }
+        }
+
+        return ret+1;
     }
 };
 
