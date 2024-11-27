@@ -114,6 +114,14 @@ public:
     return nodes[v].adj.size();
   }
 
+  int weightedOutDegree(int v){
+    int ret = 0;
+    for (const Edge& edge: nodes[v].adj){
+        ret += edge.weight;
+    }
+    return ret;
+  }
+
   
 };
 
