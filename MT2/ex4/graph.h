@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <list>
+#include <memory>
 #include <queue>
 
 class Graph {
@@ -23,7 +24,8 @@ class Graph {
 	
   struct Node {
     std::list<Edge> adj; // The list of outgoing edges (to adjacent nodes)
-    bool visited;        // Has the node been visited in a graph traversal?
+    bool visited;// Has the node been visited in a graph traversal?
+    int distance;
   };
 	
   int n;                   // Graph size (vertices are numbered from 1 to n)
@@ -110,6 +112,31 @@ public:
   // TODO: put the functions you need to implement below this
   // ---------------------------------------------------------
 
+  int distance(int v, int b){
+    if (v == b) return 0;
+    bool connects = false;
+    for (int i=1; i<=n; i++) nodes[i].visited = false;
+    std::queue<int> q; // queue of unvisited nodes
+    q.push(v);
+    nodes[v].distance = 0;
+    nodes[v].visited = true;
+    while (!q.empty()) { // while there are still unvisited nodes
+      int u = q.front(); q.pop();
+    //  std::cout << u << " ";  // show node order
+      for (auto e : nodes[u].adj) {
+        int w = e.dest;
+        if (!nodes[w].visited) {
+          q.push(w);
+          nodes[w].visited = true;
+          nodes[w].distance = nodes[u].distance +1;
+        if (w == b) connects = true;
+        }
+      }
+    }
+
+    if (!connects) return -1;
+    return nodes[b].distance - nodes[v].distance;
+  }
   
 
   
