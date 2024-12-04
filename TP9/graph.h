@@ -209,6 +209,14 @@ public:
 
         return ret+1;
     }
+
+    std::list<int> topologicalSorting(){
+        std::list<int> ret;
+        
+
+        
+        return ret;
+    }
 };
 
 #endif
