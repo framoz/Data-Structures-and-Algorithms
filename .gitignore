@@ -1,4 +1,41 @@
-/.vscode
-/ex1_slide1
-/insertion_sort
-*.out
+# Ignore files with no extension (binaries, temp files)
+*
+
+# Allow folders and files with extensions
+!*/
+!*.*
+
+# Ignore specific C/C++ build artifacts
+*.o           # Object files
+*.obj         # Object files (Windows)
+*.so          # Shared libraries
+*.dll         # Dynamic-link libraries (Windows)
+*.dylib       # Dynamic libraries (macOS)
+*.a           # Static libraries
+*.lib         # Static libraries (Windows)
+*.out         # Output files
+*.exe         # Executable files (Windows)
+*.stackdump   # Stack dump files (Windows)
+*.pdb         # Program database files (debugging info, Windows)
+*.ilk         # Incremental linking files (Visual Studio)
+*.tmp         # Temporary files
+
+# Ignore CLion specific files
+.idea/                  # Project-specific IDE settings
+cmake-build-debug/      # Debug build folder
+cmake-build-release/    # Release build folder
+*.iml                   # IntelliJ module files
+
+# Ignore CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Ignore other development files
+*.log        # Log files
+*.swp        # Swap files (Vim)
+*.swo        # Swap files (Vim)
+*~           # Backup files
+.DS_Store    # macOS metadata files
+Thumbs.db    # Windows thumbnail cache
