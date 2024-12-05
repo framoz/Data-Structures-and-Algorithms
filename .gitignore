@@ -1,5 +1,7 @@
 # Ignore files with no extension (binaries, temp files)
 *
+.vscode
+.idea
 
 # Allow folders and files with extensions
 !*/
