@@ -138,7 +138,45 @@ public:
     return nodes[b].distance - nodes[v].distance;
   }
   
+int singleDiameter(int v) {
 
+    int max = 0;
+    int visits = 1;
+    for (int i=1; i<=n; i++) nodes[i].visited = false;
+    std::queue<int> q; // queue of unvisited nodes
+    q.push(v);
+    nodes[v].distance = 0;
+    visits++;
+    nodes[v].visited = true;
+    while (!q.empty()) { // while there are still unvisited nodes
+      int u = q.front(); q.pop();
+    //  std::cout << u << " ";  // show node order
+      for (auto e : nodes[u].adj) {
+        int w = e.dest;
+        if (!nodes[w].visited) {
+          q.push(w);
+          nodes[w].visited = true;
+          nodes[w].distance = nodes[u].distance +1;
+          visits++;
+          //std::cout << visits << " ";
+          if (nodes[w].distance > max) max = nodes[w].distance;
+        }
+      }
+    }
+    if (visits != nodes.size()) return -1;
+    return max;
+  }
+
+  int diameter() {
+    int res = -1;
+
+    for (int i = 1; i <= n; i++) {
+      int sd = singleDiameter(i);
+      if (sd == -1) return sd;
+      if (sd > res) res = sd;
+    }
+    return res;
+  }
   
 };
 
