@@ -41,3 +41,4 @@ Makefile
 *~           # Backup files
 .DS_Store    # macOS metadata files
 Thumbs.db    # Windows thumbnail cache
+.idea/
