@@ -209,7 +209,51 @@ public:
   // TODO: put the functions you need to implement below this
   // ---------------------------------------------------------
 
+   int numberLeafs()
+  {
+     int val = 0;
+    //std::cout << "DFS:";
 
+    std::stack<Node *> s;
+    s.push(root);
+    while (!s.empty()) {
+      Node *cur = s.top();
+      s.pop();
+      if (cur != nullptr) {
+        if (cur->left == nullptr && cur->right == nullptr) {
+          val++;
+        }
+        s.push(cur->left);
+        s.push(cur->right);
+      }
+    }
+
+     return val;
+
+   }
+
+   bool strict(){
+
+    //std::cout << "DFS:";
+
+    std::stack<Node *> s;
+    s.push(root);
+    while (!s.empty()) {
+      Node *cur = s.top();
+      s.pop();
+      if (cur != nullptr) {
+        if (!((cur->left == nullptr && cur->right == nullptr) ||
+                (cur->left != nullptr && cur->right != nullptr))) {
+          return false;
+
+        }
+        s.push(cur->left);
+        s.push(cur->right);
+      }
+    }
+
+    return true;
+   }
   
 };
 
