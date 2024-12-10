@@ -214,7 +214,7 @@ public:
 
     void insert(int pos, const T &v) {
         if (pos > length) return;
-
+        if (pos < 0) return;
         Node<T> *newNode = new Node<T>(v, nullptr);
         if (isEmpty()) {
             first = newNode;
@@ -234,6 +234,14 @@ public:
             cur->setNext(newNode);
         }
         length++;
+    }
+
+    void duplicate() {
+        int i = 0;
+        for (Node<T> *cur = first; i<length; cur = cur->getNext()) {
+            insert(i, cur->getValue());
+            i+= 2;
+        }
     }
 };
 
