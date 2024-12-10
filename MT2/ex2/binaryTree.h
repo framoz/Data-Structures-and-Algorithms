@@ -254,6 +254,22 @@ public:
 
     return true;
    }
+
+  T & path(std::string s){
+    Node *cur = root;
+    for (char c : s) {
+      if( c== 'L'){
+        cur = cur->left;
+      }
+      else if ( c == 'R'){
+        cur = cur->right;
+      }
+      else{
+        break;
+      }
+    }
+    return cur->value;
+    }
   
 };
 
