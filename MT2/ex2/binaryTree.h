@@ -21,6 +21,7 @@ private:
   struct Node {
     T value;            // The value stored on the node
     Node *left, *right; // Pointers to left and right child
+    int distance;
   };
 
   // The tree 
@@ -270,7 +271,32 @@ public:
     }
     return cur->value;
     }
-  
+
+  int nodesLevel(int k){
+    int res = 0;
+    std::queue<Node *> q;
+    root->distance = 0;
+    q.push(root);
+    while (!q.empty()) {
+      Node *cur = q.front();
+      q.pop();
+      if (cur != nullptr) {
+        //std::cout << " " << cur->value;
+        if(cur->distance == k) res++;
+
+        if (cur->left != nullptr) {
+          cur->left->distance = cur->distance + 1;
+        }
+        if (cur->right != nullptr) {
+          cur->right->distance = cur->distance + 1;
+        };
+        q.push(cur->left);
+        q.push(cur->right);
+
+      }
+    }
+    return res;
+  }
 };
 
 
