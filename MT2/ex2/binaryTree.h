@@ -297,6 +297,53 @@ public:
     }
     return res;
   }
+
+  int countEven() {
+    int res = 0;
+
+    std::queue<Node *> q;
+    q.push(root);
+    while (!q.empty()) {
+      Node *cur = q.front();
+      q.pop();
+      if (cur != nullptr) {
+       if (cur->value % 2 == 0) res++;
+        q.push(cur->left);
+        q.push(cur->right);
+      }
+    }
+
+    return res;
+  }
+  std::vector<int> sumLevels() {
+    std::vector<int> res;
+
+    std::queue<Node *> q;
+    root->distance = 0;
+    q.push(root);
+    while (!q.empty()) {
+      Node *cur = q.front();
+
+      q.pop();
+      if (cur != nullptr) {
+        //std::cout << " " << cur->value;
+        if (res.size() <= cur->distance) res.push_back(0);
+        res.at(cur->distance) += cur->value;
+
+        if (cur->left != nullptr) {
+          cur->left->distance = cur->distance + 1;
+        }
+        if (cur->right != nullptr) {
+          cur->right->distance = cur->distance + 1;
+        };
+        q.push(cur->left);
+        q.push(cur->right);
+
+      }
+    }
+    return res;
+
+  }
 };
 
 
